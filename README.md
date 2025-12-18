@@ -57,6 +57,8 @@ To execute the Android application tests locally:
 Bash
 
 npm run android.app
+
+
 📝 Current Test Coverage
 Authentication Flow:
 

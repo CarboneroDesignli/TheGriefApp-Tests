@@ -1,0 +1,15 @@
+{
+    // Mocha Test Explorer extension settings to discover TypeScript test files
+    "mochaExplorer.files.glob": "**/tests/specs/**/*.e2e.ts",
+    "mochaExplorer.require": ["ts-node/register"],
+    "mochaExplorer.timeout": 180000,
+    "mochaExplorer.ui": "bdd",
+    "mochaExplorer.environmentVariables": {
+        "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.json"
+    },
+
+    // Optional: broaden the file pattern so other adapters can see tests too
+    "files.associations": {
+        "*.e2e.ts": "typescript"
+    }
+}

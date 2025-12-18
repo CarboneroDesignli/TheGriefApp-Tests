@@ -3,7 +3,7 @@ import { config as baseConfig } from './wdio.shared.conf.js';
 export const config: WebdriverIO.Config = {
     ...baseConfig,
     
-    // Indica dónde corre tu Appium manual
+
     port: 4723, 
     path: '/', 
 
@@ -24,12 +24,12 @@ export const config: WebdriverIO.Config = {
 
     services: [
         ...baseConfig.services || [],
-        // [                       <--- COMENTA ESTO
-        //     'appium',           <--- COMENTA ESTO
-        //     {                   <--- COMENTA ESTO
-        //         args: { ... }   <--- COMENTA ESTO
-        //     },                  <--- COMENTA ESTO
-        // ],                      <--- COMENTA ESTO
+        // [                       
+        //     'appium',            
+        //     {                    
+        //         args: { ... }   
+        //     },                  
+        // ],                      
     ],
     
     
