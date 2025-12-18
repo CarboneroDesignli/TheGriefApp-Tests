@@ -1,6 +1,5 @@
 class WelcomeScreen {
     // Selectors
-    // Prefer Accessibility ID because it's fast and stable across builds
     get btnGetStarted() {
         return $('~Get started'); 
     }

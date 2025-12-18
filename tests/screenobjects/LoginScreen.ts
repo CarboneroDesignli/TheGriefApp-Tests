@@ -1,6 +1,5 @@
 class LoginScreen {
     // Selectors
-    // Use the 'android=' UiSelector strategy to reliably target elements by resourceId or text on Android
     get inputUsername() {
         return $('android=new UiSelector().resourceId("username")');
     }

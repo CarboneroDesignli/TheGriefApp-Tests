@@ -1,14 +1,18 @@
 import type { Options } from '@wdio/types';
 
 /**
- * Configuración compartida para todos los entornos.
- * Las configuraciones específicas de plataforma (Android/iOS) heredarán de este objeto.
+ * Shared configuration for all environments.
+ * Specific platform configurations (Android/iOS) will inherit from this object.
  */
 export const config: Options.Testrunner = {
     // ====================
     // Runner Configuration
     // ====================
-    logLevel: 'info', // Cambiado de 'debug' a 'info' para reducir ruido en logs, a menos que estés depurando
+    /**
+     * Level of logging verbosity. 
+     * Set to 'warn' to prevent 'no such element' retry logs from cluttering the terminal.
+     */
+    logLevel: 'warn', 
     bail: 0,
     waitforTimeout: 45000,
     connectionRetryTimeout: 120000,
@@ -17,12 +21,17 @@ export const config: Options.Testrunner = {
     // ===================
     // Test Configurations
     // ===================
-    // Unificamos el framework a Cucumber para evitar conflictos con Mocha
+    /**
+     * Use Cucumber as the test framework. 
+     * Shared reporters like 'spec' will be used across all platforms.
+     */
     framework: 'cucumber',
     reporters: ['spec'],
 
-    // Configuraciones globales de Cucumber
-    // Estas se pueden sobreescribir en archivos específicos si es necesario
+    /**
+     * Global Cucumber options.
+     * These can be overridden in platform-specific configuration files.
+     */
     cucumberOpts: {
         backtrace: false,
         requireModule: [],
@@ -32,8 +41,12 @@ export const config: Options.Testrunner = {
         snippets: true,
         source: true,
         strict: false,
-        tagExpression: 'not @skip',
-        timeout: 180000, // 3 minutos para estabilidad en pruebas móviles
+        /**
+         * 'tags' replaces the deprecated 'tagExpression'.
+         * Default to skip scenarios marked with @skip.
+         */
+        tags: 'not @skip',
+        timeout: 180000, // 3-minute timeout for mobile stability
         ignoreStepDefinitionSkipped: false
     }
 };

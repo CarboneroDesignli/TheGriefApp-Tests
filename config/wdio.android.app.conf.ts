@@ -5,7 +5,10 @@ import { config as baseConfig } from './wdio.shared.local.appium.conf';
 
 dotenv.config({ path: path.join(process.cwd(), '.env') });
 
-// Lógica de entorno para Android SDK
+/**
+ * Environment logic to automatically locate the Android SDK path 
+ * if the ANDROID_HOME variable is not explicitly set.
+ */
 if (!process.env.ANDROID_HOME) {
     const homeDir = os.homedir();
     process.env.ANDROID_HOME = process.platform === 'win32' 
@@ -19,12 +22,18 @@ export const config: WebdriverIO.Config = {
 
     maxInstances: 1,
 
-    // Las Specs se definen aquí por ser específicas de Cucumber
+    /**
+     * Define the location of feature files. 
+     * These are specific to the Cucumber framework implementation.
+     */
     specs: [
         path.join(process.cwd(), 'features/**/*.feature'),
     ],
 
-    // Extendemos las opciones de Cucumber del archivo compartido
+    /**
+     * Extend global Cucumber options from the shared configuration 
+     * and specify the path for step definition files.
+     */
     cucumberOpts: {
         ...baseConfig.cucumberOpts,
         require: [
@@ -32,7 +41,10 @@ export const config: WebdriverIO.Config = {
         ],
     },
 
-    // Definición limpia de capacidades para Android
+    /**
+     * Clean definition of Android-specific capabilities.
+     * Prioritize UDID and package details for reliable device targeting.
+     */
     capabilities: [
         {
             platformName: 'Android',

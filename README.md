@@ -1,38 +1,42 @@
 The Grief App - Mobile Automation Framework 📱
 Professional End-to-End (E2E) automation suite for The Grief App (Android), built using WebdriverIO, Appium, and TypeScript with a robust Screen Object Model (SOM) architecture.
 
-🚀 Overview
-This framework is engineered for scalability and maintainability, utilizing Mocha as the test runner to validate critical user journeys. The current implementation focuses on the core authentication and onboarding flows.
+🚀 ## Overview This framework is engineered for scalability and maintainability, utilizing Cucumber (BDD) to bridge the gap between technical execution and business requirements. It is designed to validate critical user journeys, currently focusing on core authentication, onboarding, and system permission flows.
 
-🛠️ Tech Stack
+🛠️ ## Tech Stack
+
 Engine: WebdriverIO v9
 
 Driver: Appium v3 (UiAutomator2)
 
 Language: TypeScript
 
-Framework: Mocha
+Framework: Cucumber (BDD)
+
+Assertion Library: Expect-WebdriverIO
 
 Design Pattern: Screen Object Model (SOM)
 
-📁 Project Structure
-tests/specs/: Test definitions and execution logic (e.g., login.e2e.ts).
+📁 ## Project Structure
+
+features/: Gherkin scenario definitions (.feature files).
+
+features/step-definitions/: Glue code mapping Gherkin steps to execution logic.
 
 tests/screenobjects/: Encapsulated UI elements and interactions for specific screens.
 
-tests/helpers/: Utility classes for WebView handling, biometrics, and common actions.
+config/: Environment-specific configuration files (Shared, Local, Android).
 
-config/: Environment-specific configuration files for Android and local Appium execution.
+🚦 ## Getting Started
 
-🚦 Getting Started
 Prerequisites
 Node.js (v18 or higher)
 
-Android SDK & Platform Tools
+Android SDK & Platform Tools (ANDROID_HOME setup)
 
-Appium Server
+Appium Server running locally
 
-A running Android Emulator or Physical Device
+A running Android Emulator or Physical Device (Samsung A55 recommended)
 
 Installation
 Clone the repository:
@@ -51,22 +55,35 @@ Code snippet
 
 TEST_USER_EMAIL=your_email@example.com
 TEST_USER_PASS=your_password
-Running Tests
-To execute the Android application tests locally:
+🏃 Running Tests
+Full Execution
+To execute all Android application tests:
 
 Bash
 
 npm run android.app
+Smoke Testing 💨
+To run only the critical tests tagged with @smoke (optimized for quick validation):
 
+Bash
 
-📝 Current Test Coverage
+npm run android.app.smoke
+📝 ## Current Test Coverage
+
 Authentication Flow:
 
 [x] Welcome Screen "Get Started" interaction.
 
 [x] Secure Login with environment-based credentials.
 
-[x] System-level "Push Notifications" permission handling.
+Onboarding & Permissions:
 
-👤 Author
-Marlon - QA Engineer
+[x] Positive flow: Accepting system-level Push Notifications.
+
+[x] Negative flow: Denying notifications (validating app-level "Maybe later").
+
+Home Screen Validation:
+
+[x] Assert visibility of core dashboard elements (Grief Wave, Workbook).
+
+👤 ## Author Marlon - QA Engineer
