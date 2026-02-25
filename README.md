@@ -68,6 +68,13 @@ To run only the critical tests tagged with @smoke (optimized for quick validatio
 Bash
 
 npm run android.app.smoke
+
+To run while generating and opening the allure reports (First section can be changed depending on what you want to run):
+
+Bash
+
+npm run android.app.memoryBook; npm run report:generate; npm run report:open
+
 📝 ## Current Test Coverage
 
 Authentication Flow:

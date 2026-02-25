@@ -1,0 +1,1 @@
+stale element reference: WebDriverError: The element 'By.xpath: //android.view.ViewGroup[@content-desc="Add a good moment"]' does not exist in DOM anymore when running "element/00000000-0000-001e-ffff-ffff000002ef/displayed" with method "GET"

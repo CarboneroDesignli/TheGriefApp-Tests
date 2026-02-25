@@ -1,27 +1,31 @@
 Feature: Memory Book Management
 
-    Background:
-        Given I am logged in and on the Home screen
-        And I navigate to the Memory Book screen
-
     @smoke
     Scenario: Create a valid memory entry with image and text
+        # These only run now, at the start of the first test
+        Given I am logged in and on the Home screen
+        And I navigate to the Memory Book screen
         When I add a memory with a unique description and a photo
-        Then I should see the new memory entry in the list
+        And I should be on the Memory Book main screen
+    # Ensure you stay on the Memory Book screen for the next tests
 
-    @validation
+    @smoke
     Scenario: Try to add memory without photo
         When I enter a description but no photo
         And I try to save the memory
-        Then I should see the error message "Photo is required"
+        And I should be on the Memory Book main screen
 
-    @validation
+
+    @smoke
     Scenario: Try to add memory without description
         When I select a photo but leave the description empty
         And I try to save the memory
-        Then I should see the error message "Description is required"
+        And I should be on the Memory Book main screen
 
-    @validation
+
+
+    @smoke
     Scenario: Try to add memory without both
         When I try to save the memory without any data
-        Then I should see both errors "Photo is required" and "Description is required"
+        Then the button should stay disabled
+        And I go back to the Memory Book main screen

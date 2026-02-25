@@ -1,4 +1,4 @@
-import { Given, When, Then } from '@wdio/cucumber-framework';
+import { Given, When, Then } from '../support/stepRetry.js';
 import WelcomeScreen from '../../tests/screenobjects/WelcomeScreen';
 import LoginScreen from '../../tests/screenobjects/LoginScreen';
 import PermissionsScreen from '../../tests/screenobjects/PermissionsScreen';

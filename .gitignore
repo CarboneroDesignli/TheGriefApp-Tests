@@ -17,3 +17,6 @@ chromeDriver
 
 # --- SEGURIDAD ---
 .env
+
+# --- ALLURE ---
+allure-results/

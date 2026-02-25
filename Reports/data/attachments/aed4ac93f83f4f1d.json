@@ -1,0 +1,4 @@
+{
+  "using": "-android uiautomator",
+  "value": "new UiSelector().text(\"Auto Memory 1771977720294\")"
+}

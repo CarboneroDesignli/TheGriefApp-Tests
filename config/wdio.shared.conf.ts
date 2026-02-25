@@ -1,17 +1,9 @@
 import type { Options } from '@wdio/types';
 
-/**
- * Shared configuration for all environments.
- * Specific platform configurations (Android/iOS) will inherit from this object.
- */
 export const config: Options.Testrunner = {
     // ====================
     // Runner Configuration
     // ====================
-    /**
-     * Level of logging verbosity. 
-     * Set to 'warn' to prevent 'no such element' retry logs from cluttering the terminal.
-     */
     logLevel: 'warn', 
     bail: 0,
     waitforTimeout: 45000,
@@ -21,16 +13,21 @@ export const config: Options.Testrunner = {
     // ===================
     // Test Configurations
     // ===================
-    /**
-     * Use Cucumber as the test framework. 
-     * Shared reporters like 'spec' will be used across all platforms.
-     */
     framework: 'cucumber',
-    reporters: ['spec'],
+
+    // Combined Reporters List
+    reporters: [
+        'spec', 
+        ['allure', {
+            outputDir: 'allure-results',
+            disableWebdriverStepsReporting: false,
+            disableWebdriverScreenshotsReporting: false,
+            useCucumberStepReporter: true 
+        }]
+    ],
 
     /**
      * Global Cucumber options.
-     * These can be overridden in platform-specific configuration files.
      */
     cucumberOpts: {
         backtrace: false,
@@ -41,12 +38,29 @@ export const config: Options.Testrunner = {
         snippets: true,
         source: true,
         strict: false,
-        /**
-         * 'tags' replaces the deprecated 'tagExpression'.
-         * Default to skip scenarios marked with @skip.
-         */
         tags: 'not @skip',
-        timeout: 180000, // 3-minute timeout for mobile stability
+        timeout: 180000, 
         ignoreStepDefinitionSkipped: false
+    },
+
+// ===================
+    // Hooks
+    // ===================
+
+    /**
+     * Captures a screenshot after every failed Cucumber step.
+     */
+    afterStep: async function (step, scenario, { error }) {
+        if (error) {
+            await driver.takeScreenshot();
+        }
+    },
+
+    /**
+     * Captures a screenshot at the very end of every scenario (Passed or Failed).
+     */
+    afterScenario: async function (world, result) {
+        // This ensures you always have a visual record of the final state.
+        await driver.takeScreenshot();
     }
 };

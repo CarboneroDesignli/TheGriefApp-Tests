@@ -4,7 +4,7 @@ class MemoryBook {
     // --- Selectores ---
     get btnAddToMemoryBook() { return $('android=new UiSelector().text("Add to memory book")'); }
     get btnSave()            { return $('~Save'); }
-    get btnClose()           { return $('//com.horcrux.svg.RectView'); }
+    get btnClose()           { return $('android=new UiSelector().className("com.horcrux.svg.RectView")'); }
     get inputDescription()   { return $('android=new UiSelector().className("android.widget.EditText")'); }
 
     /**
@@ -29,6 +29,16 @@ class MemoryBook {
     async fillDescription(text: string) {
         await this.inputDescription.waitForDisplayed();
         await this.inputDescription.setValue(text);
+    }
+
+    /**
+     * Intenta regresar a la pantalla principal de Memory Book.
+     * Si el formulario de creación/edición está abierto, se cierra con el botón de cierre.
+     */
+    async goBackToMainScreen() {
+        if (await this.btnClose.isDisplayed()) {
+            await AppiumUtils.waitAndClick(this.btnClose);
+        }
     }
 }
 
